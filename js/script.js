@@ -991,3 +991,37 @@ function SF_scripts(){
 	}
 
 }; // SF_scripts end
+
+// script for tab steps
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+
+	var href = $(e.target).attr('href');
+	var $curr = $(".process-model  a[href='" + href + "']").parent();
+
+	$('.process-model li').removeClass();
+
+	$curr.addClass("active");
+	$curr.prevAll().addClass("visited");
+});
+// end  script for tab steps
+
+// step //
+const stepButtons = document.querySelectorAll('.step-button');
+const progress = document.querySelector('#progress');
+
+Array.from(stepButtons).forEach((button,index) => {
+	button.addEventListener('click', () => {
+		progress.setAttribute('value', index * 100 /(stepButtons.length - 1) );//there are 3 buttons. 2 spaces.
+
+		stepButtons.forEach((item, secindex)=>{
+			if(index > secindex){
+				item.classList.add('done');
+			}
+			if(index < secindex){
+				item.classList.remove('done');
+			}
+		})
+	})
+});
+
+// step end //
